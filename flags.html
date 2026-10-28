@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Flags of the World</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="flags_files/libs/clipboard/clipboard.min.js"></script>
+<script src="flags_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="flags_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="flags_files/libs/quarto-html/popper.min.js"></script>
+<script src="flags_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="flags_files/libs/quarto-html/anchor.min.js"></script>
+<link href="flags_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="flags_files/libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="flags_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="flags_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="flags_files/libs/bootstrap/bootstrap-2d8e8d8c08cd9eb5ffb286a132dd36b7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Flags of the World</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+.flag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.flag-grid figure {
+  margin: 0;
+  text-align: center;
+}
+
+.flag-grid img {
+  width: 100%;
+  height: auto;
+}
+</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>flags <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">"^[a-z]{2}</span><span class="sc">\\</span><span class="st">.png$"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">'&lt;div class="flag-grid"&gt;'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="flag-grid">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (flag <span class="cf">in</span> flags) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  code <span class="ot">&lt;-</span> tools<span class="sc">::</span><span class="fu">file_path_sans_ext</span>(flag)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">sprintf</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'&lt;figure&gt;&lt;img src="%s" alt="Flag of %s"&gt;&lt;figcaption&gt;%s&lt;/figcaption&gt;&lt;/figure&gt;'</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    flag, <span class="fu">toupper</span>(code), <span class="fu">toupper</span>(code)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<figure class="figure">
+<img src="ad.png" alt="Flag of AD" class="figure-img">
+<figcaption>
+AD
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ae.png" alt="Flag of AE" class="figure-img">
+<figcaption>
+AE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="af.png" alt="Flag of AF" class="figure-img">
+<figcaption>
+AF
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ag.png" alt="Flag of AG" class="figure-img">
+<figcaption>
+AG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ai.png" alt="Flag of AI" class="figure-img">
+<figcaption>
+AI
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="al.png" alt="Flag of AL" class="figure-img">
+<figcaption>
+AL
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="am.png" alt="Flag of AM" class="figure-img">
+<figcaption>
+AM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ao.png" alt="Flag of AO" class="figure-img">
+<figcaption>
+AO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="aq.png" alt="Flag of AQ" class="figure-img">
+<figcaption>
+AQ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ar.png" alt="Flag of AR" class="figure-img">
+<figcaption>
+AR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="as.png" alt="Flag of AS" class="figure-img">
+<figcaption>
+AS
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="at.png" alt="Flag of AT" class="figure-img">
+<figcaption>
+AT
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="au.png" alt="Flag of AU" class="figure-img">
+<figcaption>
+AU
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="aw.png" alt="Flag of AW" class="figure-img">
+<figcaption>
+AW
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ax.png" alt="Flag of AX" class="figure-img">
+<figcaption>
+AX
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="az.png" alt="Flag of AZ" class="figure-img">
+<figcaption>
+AZ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ba.png" alt="Flag of BA" class="figure-img">
+<figcaption>
+BA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bb.png" alt="Flag of BB" class="figure-img">
+<figcaption>
+BB
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bd.png" alt="Flag of BD" class="figure-img">
+<figcaption>
+BD
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="be.png" alt="Flag of BE" class="figure-img">
+<figcaption>
+BE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bf.png" alt="Flag of BF" class="figure-img">
+<figcaption>
+BF
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bg.png" alt="Flag of BG" class="figure-img">
+<figcaption>
+BG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bh.png" alt="Flag of BH" class="figure-img">
+<figcaption>
+BH
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bi.png" alt="Flag of BI" class="figure-img">
+<figcaption>
+BI
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bj.png" alt="Flag of BJ" class="figure-img">
+<figcaption>
+BJ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bl.png" alt="Flag of BL" class="figure-img">
+<figcaption>
+BL
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bm.png" alt="Flag of BM" class="figure-img">
+<figcaption>
+BM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bn.png" alt="Flag of BN" class="figure-img">
+<figcaption>
+BN
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bo.png" alt="Flag of BO" class="figure-img">
+<figcaption>
+BO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bq.png" alt="Flag of BQ" class="figure-img">
+<figcaption>
+BQ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="br.png" alt="Flag of BR" class="figure-img">
+<figcaption>
+BR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bs.png" alt="Flag of BS" class="figure-img">
+<figcaption>
+BS
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bt.png" alt="Flag of BT" class="figure-img">
+<figcaption>
+BT
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bv.png" alt="Flag of BV" class="figure-img">
+<figcaption>
+BV
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bw.png" alt="Flag of BW" class="figure-img">
+<figcaption>
+BW
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="by.png" alt="Flag of BY" class="figure-img">
+<figcaption>
+BY
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="bz.png" alt="Flag of BZ" class="figure-img">
+<figcaption>
+BZ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ca.png" alt="Flag of CA" class="figure-img">
+<figcaption>
+CA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cc.png" alt="Flag of CC" class="figure-img">
+<figcaption>
+CC
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cd.png" alt="Flag of CD" class="figure-img">
+<figcaption>
+CD
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cf.png" alt="Flag of CF" class="figure-img">
+<figcaption>
+CF
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cg.png" alt="Flag of CG" class="figure-img">
+<figcaption>
+CG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ch.png" alt="Flag of CH" class="figure-img">
+<figcaption>
+CH
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ci.png" alt="Flag of CI" class="figure-img">
+<figcaption>
+CI
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ck.png" alt="Flag of CK" class="figure-img">
+<figcaption>
+CK
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cl.png" alt="Flag of CL" class="figure-img">
+<figcaption>
+CL
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cm.png" alt="Flag of CM" class="figure-img">
+<figcaption>
+CM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cn.png" alt="Flag of CN" class="figure-img">
+<figcaption>
+CN
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="co.png" alt="Flag of CO" class="figure-img">
+<figcaption>
+CO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cr.png" alt="Flag of CR" class="figure-img">
+<figcaption>
+CR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cu.png" alt="Flag of CU" class="figure-img">
+<figcaption>
+CU
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cv.png" alt="Flag of CV" class="figure-img">
+<figcaption>
+CV
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cw.png" alt="Flag of CW" class="figure-img">
+<figcaption>
+CW
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cx.png" alt="Flag of CX" class="figure-img">
+<figcaption>
+CX
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cy.png" alt="Flag of CY" class="figure-img">
+<figcaption>
+CY
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="cz.png" alt="Flag of CZ" class="figure-img">
+<figcaption>
+CZ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="de.png" alt="Flag of DE" class="figure-img">
+<figcaption>
+DE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="dj.png" alt="Flag of DJ" class="figure-img">
+<figcaption>
+DJ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="dk.png" alt="Flag of DK" class="figure-img">
+<figcaption>
+DK
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="dm.png" alt="Flag of DM" class="figure-img">
+<figcaption>
+DM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="do.png" alt="Flag of DO" class="figure-img">
+<figcaption>
+DO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="dz.png" alt="Flag of DZ" class="figure-img">
+<figcaption>
+DZ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ec.png" alt="Flag of EC" class="figure-img">
+<figcaption>
+EC
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ee.png" alt="Flag of EE" class="figure-img">
+<figcaption>
+EE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="eg.png" alt="Flag of EG" class="figure-img">
+<figcaption>
+EG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="eh.png" alt="Flag of EH" class="figure-img">
+<figcaption>
+EH
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="er.png" alt="Flag of ER" class="figure-img">
+<figcaption>
+ER
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="es.png" alt="Flag of ES" class="figure-img">
+<figcaption>
+ES
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="et.png" alt="Flag of ET" class="figure-img">
+<figcaption>
+ET
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="fi.png" alt="Flag of FI" class="figure-img">
+<figcaption>
+FI
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="fj.png" alt="Flag of FJ" class="figure-img">
+<figcaption>
+FJ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="fk.png" alt="Flag of FK" class="figure-img">
+<figcaption>
+FK
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="fm.png" alt="Flag of FM" class="figure-img">
+<figcaption>
+FM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="fo.png" alt="Flag of FO" class="figure-img">
+<figcaption>
+FO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="fr.png" alt="Flag of FR" class="figure-img">
+<figcaption>
+FR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ga.png" alt="Flag of GA" class="figure-img">
+<figcaption>
+GA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gb.png" alt="Flag of GB" class="figure-img">
+<figcaption>
+GB
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gd.png" alt="Flag of GD" class="figure-img">
+<figcaption>
+GD
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ge.png" alt="Flag of GE" class="figure-img">
+<figcaption>
+GE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gf.png" alt="Flag of GF" class="figure-img">
+<figcaption>
+GF
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gg.png" alt="Flag of GG" class="figure-img">
+<figcaption>
+GG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gh.png" alt="Flag of GH" class="figure-img">
+<figcaption>
+GH
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gi.png" alt="Flag of GI" class="figure-img">
+<figcaption>
+GI
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gl.png" alt="Flag of GL" class="figure-img">
+<figcaption>
+GL
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gm.png" alt="Flag of GM" class="figure-img">
+<figcaption>
+GM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gn.png" alt="Flag of GN" class="figure-img">
+<figcaption>
+GN
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gp.png" alt="Flag of GP" class="figure-img">
+<figcaption>
+GP
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gq.png" alt="Flag of GQ" class="figure-img">
+<figcaption>
+GQ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gr.png" alt="Flag of GR" class="figure-img">
+<figcaption>
+GR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gs.png" alt="Flag of GS" class="figure-img">
+<figcaption>
+GS
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gt.png" alt="Flag of GT" class="figure-img">
+<figcaption>
+GT
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gu.png" alt="Flag of GU" class="figure-img">
+<figcaption>
+GU
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gw.png" alt="Flag of GW" class="figure-img">
+<figcaption>
+GW
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="gy.png" alt="Flag of GY" class="figure-img">
+<figcaption>
+GY
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="hk.png" alt="Flag of HK" class="figure-img">
+<figcaption>
+HK
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="hm.png" alt="Flag of HM" class="figure-img">
+<figcaption>
+HM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="hn.png" alt="Flag of HN" class="figure-img">
+<figcaption>
+HN
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="hr.png" alt="Flag of HR" class="figure-img">
+<figcaption>
+HR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ht.png" alt="Flag of HT" class="figure-img">
+<figcaption>
+HT
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="hu.png" alt="Flag of HU" class="figure-img">
+<figcaption>
+HU
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="id.png" alt="Flag of ID" class="figure-img">
+<figcaption>
+ID
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ie.png" alt="Flag of IE" class="figure-img">
+<figcaption>
+IE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="il.png" alt="Flag of IL" class="figure-img">
+<figcaption>
+IL
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="im.png" alt="Flag of IM" class="figure-img">
+<figcaption>
+IM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="in.png" alt="Flag of IN" class="figure-img">
+<figcaption>
+IN
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="io.png" alt="Flag of IO" class="figure-img">
+<figcaption>
+IO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="iq.png" alt="Flag of IQ" class="figure-img">
+<figcaption>
+IQ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ir.png" alt="Flag of IR" class="figure-img">
+<figcaption>
+IR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="is.png" alt="Flag of IS" class="figure-img">
+<figcaption>
+IS
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="it.png" alt="Flag of IT" class="figure-img">
+<figcaption>
+IT
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="je.png" alt="Flag of JE" class="figure-img">
+<figcaption>
+JE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="jm.png" alt="Flag of JM" class="figure-img">
+<figcaption>
+JM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="jo.png" alt="Flag of JO" class="figure-img">
+<figcaption>
+JO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="jp.png" alt="Flag of JP" class="figure-img">
+<figcaption>
+JP
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ke.png" alt="Flag of KE" class="figure-img">
+<figcaption>
+KE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="kg.png" alt="Flag of KG" class="figure-img">
+<figcaption>
+KG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="kh.png" alt="Flag of KH" class="figure-img">
+<figcaption>
+KH
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ki.png" alt="Flag of KI" class="figure-img">
+<figcaption>
+KI
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="km.png" alt="Flag of KM" class="figure-img">
+<figcaption>
+KM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="kn.png" alt="Flag of KN" class="figure-img">
+<figcaption>
+KN
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="kp.png" alt="Flag of KP" class="figure-img">
+<figcaption>
+KP
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="kr.png" alt="Flag of KR" class="figure-img">
+<figcaption>
+KR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="kw.png" alt="Flag of KW" class="figure-img">
+<figcaption>
+KW
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ky.png" alt="Flag of KY" class="figure-img">
+<figcaption>
+KY
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="kz.png" alt="Flag of KZ" class="figure-img">
+<figcaption>
+KZ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="la.png" alt="Flag of LA" class="figure-img">
+<figcaption>
+LA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="lb.png" alt="Flag of LB" class="figure-img">
+<figcaption>
+LB
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="lc.png" alt="Flag of LC" class="figure-img">
+<figcaption>
+LC
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="li.png" alt="Flag of LI" class="figure-img">
+<figcaption>
+LI
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="lk.png" alt="Flag of LK" class="figure-img">
+<figcaption>
+LK
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="lr.png" alt="Flag of LR" class="figure-img">
+<figcaption>
+LR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ls.png" alt="Flag of LS" class="figure-img">
+<figcaption>
+LS
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="lt.png" alt="Flag of LT" class="figure-img">
+<figcaption>
+LT
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="lu.png" alt="Flag of LU" class="figure-img">
+<figcaption>
+LU
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="lv.png" alt="Flag of LV" class="figure-img">
+<figcaption>
+LV
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ly.png" alt="Flag of LY" class="figure-img">
+<figcaption>
+LY
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ma.png" alt="Flag of MA" class="figure-img">
+<figcaption>
+MA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mc.png" alt="Flag of MC" class="figure-img">
+<figcaption>
+MC
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="md.png" alt="Flag of MD" class="figure-img">
+<figcaption>
+MD
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="me.png" alt="Flag of ME" class="figure-img">
+<figcaption>
+ME
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mf.png" alt="Flag of MF" class="figure-img">
+<figcaption>
+MF
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mg.png" alt="Flag of MG" class="figure-img">
+<figcaption>
+MG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mh.png" alt="Flag of MH" class="figure-img">
+<figcaption>
+MH
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mk.png" alt="Flag of MK" class="figure-img">
+<figcaption>
+MK
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ml.png" alt="Flag of ML" class="figure-img">
+<figcaption>
+ML
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mm.png" alt="Flag of MM" class="figure-img">
+<figcaption>
+MM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mn.png" alt="Flag of MN" class="figure-img">
+<figcaption>
+MN
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mo.png" alt="Flag of MO" class="figure-img">
+<figcaption>
+MO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mp.png" alt="Flag of MP" class="figure-img">
+<figcaption>
+MP
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mq.png" alt="Flag of MQ" class="figure-img">
+<figcaption>
+MQ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mr.png" alt="Flag of MR" class="figure-img">
+<figcaption>
+MR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ms.png" alt="Flag of MS" class="figure-img">
+<figcaption>
+MS
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mt.png" alt="Flag of MT" class="figure-img">
+<figcaption>
+MT
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mu.png" alt="Flag of MU" class="figure-img">
+<figcaption>
+MU
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mv.png" alt="Flag of MV" class="figure-img">
+<figcaption>
+MV
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mw.png" alt="Flag of MW" class="figure-img">
+<figcaption>
+MW
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mx.png" alt="Flag of MX" class="figure-img">
+<figcaption>
+MX
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="my.png" alt="Flag of MY" class="figure-img">
+<figcaption>
+MY
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="mz.png" alt="Flag of MZ" class="figure-img">
+<figcaption>
+MZ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="na.png" alt="Flag of NA" class="figure-img">
+<figcaption>
+NA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="nc.png" alt="Flag of NC" class="figure-img">
+<figcaption>
+NC
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ne.png" alt="Flag of NE" class="figure-img">
+<figcaption>
+NE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="nf.png" alt="Flag of NF" class="figure-img">
+<figcaption>
+NF
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ng.png" alt="Flag of NG" class="figure-img">
+<figcaption>
+NG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ni.png" alt="Flag of NI" class="figure-img">
+<figcaption>
+NI
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="nl.png" alt="Flag of NL" class="figure-img">
+<figcaption>
+NL
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="no.png" alt="Flag of NO" class="figure-img">
+<figcaption>
+NO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="np.png" alt="Flag of NP" class="figure-img">
+<figcaption>
+NP
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="nr.png" alt="Flag of NR" class="figure-img">
+<figcaption>
+NR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="nu.png" alt="Flag of NU" class="figure-img">
+<figcaption>
+NU
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="nz.png" alt="Flag of NZ" class="figure-img">
+<figcaption>
+NZ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="om.png" alt="Flag of OM" class="figure-img">
+<figcaption>
+OM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="pa.png" alt="Flag of PA" class="figure-img">
+<figcaption>
+PA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="pe.png" alt="Flag of PE" class="figure-img">
+<figcaption>
+PE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="pf.png" alt="Flag of PF" class="figure-img">
+<figcaption>
+PF
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="pg.png" alt="Flag of PG" class="figure-img">
+<figcaption>
+PG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ph.png" alt="Flag of PH" class="figure-img">
+<figcaption>
+PH
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="pk.png" alt="Flag of PK" class="figure-img">
+<figcaption>
+PK
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="pl.png" alt="Flag of PL" class="figure-img">
+<figcaption>
+PL
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="pm.png" alt="Flag of PM" class="figure-img">
+<figcaption>
+PM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="pn.png" alt="Flag of PN" class="figure-img">
+<figcaption>
+PN
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="pr.png" alt="Flag of PR" class="figure-img">
+<figcaption>
+PR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ps.png" alt="Flag of PS" class="figure-img">
+<figcaption>
+PS
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="pt.png" alt="Flag of PT" class="figure-img">
+<figcaption>
+PT
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="pw.png" alt="Flag of PW" class="figure-img">
+<figcaption>
+PW
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="py.png" alt="Flag of PY" class="figure-img">
+<figcaption>
+PY
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="qa.png" alt="Flag of QA" class="figure-img">
+<figcaption>
+QA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="re.png" alt="Flag of RE" class="figure-img">
+<figcaption>
+RE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ro.png" alt="Flag of RO" class="figure-img">
+<figcaption>
+RO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="rs.png" alt="Flag of RS" class="figure-img">
+<figcaption>
+RS
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ru.png" alt="Flag of RU" class="figure-img">
+<figcaption>
+RU
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="rw.png" alt="Flag of RW" class="figure-img">
+<figcaption>
+RW
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sa.png" alt="Flag of SA" class="figure-img">
+<figcaption>
+SA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sb.png" alt="Flag of SB" class="figure-img">
+<figcaption>
+SB
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sc.png" alt="Flag of SC" class="figure-img">
+<figcaption>
+SC
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sd.png" alt="Flag of SD" class="figure-img">
+<figcaption>
+SD
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="se.png" alt="Flag of SE" class="figure-img">
+<figcaption>
+SE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sg.png" alt="Flag of SG" class="figure-img">
+<figcaption>
+SG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sh.png" alt="Flag of SH" class="figure-img">
+<figcaption>
+SH
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="si.png" alt="Flag of SI" class="figure-img">
+<figcaption>
+SI
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sj.png" alt="Flag of SJ" class="figure-img">
+<figcaption>
+SJ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sk.png" alt="Flag of SK" class="figure-img">
+<figcaption>
+SK
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sl.png" alt="Flag of SL" class="figure-img">
+<figcaption>
+SL
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sm.png" alt="Flag of SM" class="figure-img">
+<figcaption>
+SM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sn.png" alt="Flag of SN" class="figure-img">
+<figcaption>
+SN
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="so.png" alt="Flag of SO" class="figure-img">
+<figcaption>
+SO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sr.png" alt="Flag of SR" class="figure-img">
+<figcaption>
+SR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ss.png" alt="Flag of SS" class="figure-img">
+<figcaption>
+SS
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="st.png" alt="Flag of ST" class="figure-img">
+<figcaption>
+ST
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sv.png" alt="Flag of SV" class="figure-img">
+<figcaption>
+SV
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sx.png" alt="Flag of SX" class="figure-img">
+<figcaption>
+SX
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sy.png" alt="Flag of SY" class="figure-img">
+<figcaption>
+SY
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="sz.png" alt="Flag of SZ" class="figure-img">
+<figcaption>
+SZ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tc.png" alt="Flag of TC" class="figure-img">
+<figcaption>
+TC
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="td.png" alt="Flag of TD" class="figure-img">
+<figcaption>
+TD
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tf.png" alt="Flag of TF" class="figure-img">
+<figcaption>
+TF
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tg.png" alt="Flag of TG" class="figure-img">
+<figcaption>
+TG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="th.png" alt="Flag of TH" class="figure-img">
+<figcaption>
+TH
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tj.png" alt="Flag of TJ" class="figure-img">
+<figcaption>
+TJ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tk.png" alt="Flag of TK" class="figure-img">
+<figcaption>
+TK
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tl.png" alt="Flag of TL" class="figure-img">
+<figcaption>
+TL
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tm.png" alt="Flag of TM" class="figure-img">
+<figcaption>
+TM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tn.png" alt="Flag of TN" class="figure-img">
+<figcaption>
+TN
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="to.png" alt="Flag of TO" class="figure-img">
+<figcaption>
+TO
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tr.png" alt="Flag of TR" class="figure-img">
+<figcaption>
+TR
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tt.png" alt="Flag of TT" class="figure-img">
+<figcaption>
+TT
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tv.png" alt="Flag of TV" class="figure-img">
+<figcaption>
+TV
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tw.png" alt="Flag of TW" class="figure-img">
+<figcaption>
+TW
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="tz.png" alt="Flag of TZ" class="figure-img">
+<figcaption>
+TZ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ua.png" alt="Flag of UA" class="figure-img">
+<figcaption>
+UA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ug.png" alt="Flag of UG" class="figure-img">
+<figcaption>
+UG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="um.png" alt="Flag of UM" class="figure-img">
+<figcaption>
+UM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="us.png" alt="Flag of US" class="figure-img">
+<figcaption>
+US
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="uy.png" alt="Flag of UY" class="figure-img">
+<figcaption>
+UY
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="uz.png" alt="Flag of UZ" class="figure-img">
+<figcaption>
+UZ
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="va.png" alt="Flag of VA" class="figure-img">
+<figcaption>
+VA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="vc.png" alt="Flag of VC" class="figure-img">
+<figcaption>
+VC
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ve.png" alt="Flag of VE" class="figure-img">
+<figcaption>
+VE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="vg.png" alt="Flag of VG" class="figure-img">
+<figcaption>
+VG
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="vi.png" alt="Flag of VI" class="figure-img">
+<figcaption>
+VI
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="vn.png" alt="Flag of VN" class="figure-img">
+<figcaption>
+VN
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="vu.png" alt="Flag of VU" class="figure-img">
+<figcaption>
+VU
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="wf.png" alt="Flag of WF" class="figure-img">
+<figcaption>
+WF
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ws.png" alt="Flag of WS" class="figure-img">
+<figcaption>
+WS
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="xk.png" alt="Flag of XK" class="figure-img">
+<figcaption>
+XK
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="ye.png" alt="Flag of YE" class="figure-img">
+<figcaption>
+YE
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="yt.png" alt="Flag of YT" class="figure-img">
+<figcaption>
+YT
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="za.png" alt="Flag of ZA" class="figure-img">
+<figcaption>
+ZA
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="zm.png" alt="Flag of ZM" class="figure-img">
+<figcaption>
+ZM
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="zw.png" alt="Flag of ZW" class="figure-img">
+<figcaption>
+ZW
+</figcaption>
+</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">'&lt;/div&gt;'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

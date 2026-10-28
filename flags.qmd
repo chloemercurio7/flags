@@ -1,0 +1,37 @@
+---
+title: "Flags of the World"
+format: html
+---
+
+<style>
+.flag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.flag-grid figure {
+  margin: 0;
+  text-align: center;
+}
+
+.flag-grid img {
+  width: 100%;
+  height: auto;
+}
+</style>
+
+```{r}
+#| results: asis
+flags <- sort(list.files(pattern = "^[a-z]{2}\\.png$"))
+
+cat('<div class="flag-grid">')
+for (flag in flags) {
+  code <- tools::file_path_sans_ext(flag)
+  cat(sprintf(
+    '<figure><img src="%s" alt="Flag of %s"><figcaption>%s</figcaption></figure>',
+    flag, toupper(code), toupper(code)
+  ))
+}
+cat('</div>')
+```
