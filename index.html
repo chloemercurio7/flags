@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Look at the flag and choose its country or region. How many can you get right?</p>
 <div class="flag-game">
 <div class="game-score" aria-live="polite">
-<pre><code>Score: &lt;span id="game-score"&gt;0&lt;/span&gt; / &lt;span id="game-round"&gt;0&lt;/span&gt;</code></pre>
+<p>Score: <span id="game-score">0</span> / <span id="game-round">0</span></p>
 </div>
 <img id="quiz-flag" class="quiz-flag" alt="Flag to identify">
 <div id="quiz-choices" class="quiz-choices">
@@ -83,7 +83,9 @@ ul.task-list li input[type="checkbox"] {
 <p id="quiz-feedback" role="status">
 Loading the flag quiz…
 </p>
-<p><button id="quiz-next" type="button" disabled="">Next flag</button></p>
+<button id="quiz-next" type="button" disabled="">
+Next flag
+</button>
 </div>
 <p>Choose a flag and a comparison method to see its three closest or most different matches. “Overall” combines color mix, pattern, and width-to-height ratio; the other options isolate one of those features.</p>
 <style>
@@ -213,23 +215,7 @@ Loading the flag quiz…
 </style>
 <div class="flag-matcher">
 <div class="flag-controls">
-<pre><code>&lt;label for="target-flag"&gt;Your flag
-  &lt;select id="target-flag"&gt;&lt;/select&gt;
-&lt;/label&gt;
-&lt;label for="compare-by"&gt;Compare
-  &lt;select id="compare-by"&gt;
-    &lt;option value="overall"&gt;Overall&lt;/option&gt;
-    &lt;option value="color"&gt;Color mix&lt;/option&gt;
-    &lt;option value="pattern"&gt;Pattern / color placement&lt;/option&gt;
-    &lt;option value="shape"&gt;Shape (width-to-height ratio)&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/label&gt;
-&lt;label for="match-order"&gt;Find
-  &lt;select id="match-order"&gt;
-    &lt;option value="closest"&gt;Three closest&lt;/option&gt;
-    &lt;option value="farthest"&gt;Three most different&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/label&gt;</code></pre>
+<p><label for="target-flag">Your flag <select id="target-flag"></select> </label> <label for="compare-by">Compare <select id="compare-by"> <option value="overall">Overall</option> <option value="color">Color mix</option> <option value="pattern">Pattern / color placement</option> <option value="shape">Shape (width-to-height ratio)</option> </select> </label> <label for="match-order">Find <select id="match-order"> <option value="closest">Three closest</option> <option value="farthest">Three most different</option> </select> </label></p>
 </div>
 <p id="match-status" role="status">
 Preparing flag comparisons…
