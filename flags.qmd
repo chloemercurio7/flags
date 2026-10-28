@@ -8,13 +8,13 @@ format: html
 Look at the flag and choose its country or region. How many can you get right?
 
 <div class="flag-game">
-  <div class="game-score" aria-live="polite">
-    Score: <span id="game-score">0</span> / <span id="game-round">0</span>
-  </div>
-  <img id="quiz-flag" class="quiz-flag" alt="Flag to identify">
-  <div id="quiz-choices" class="quiz-choices"></div>
-  <p id="quiz-feedback" role="status">Loading the flag quiz…</p>
-  <button id="quiz-next" type="button" disabled>Next flag</button>
+<div class="game-score" aria-live="polite">
+Score: <span id="game-score">0</span> / <span id="game-round">0</span>
+</div>
+<img id="quiz-flag" class="quiz-flag" alt="Flag to identify">
+<div id="quiz-choices" class="quiz-choices"></div>
+<p id="quiz-feedback" role="status">Loading the flag quiz…</p>
+<button id="quiz-next" type="button" disabled>Next flag</button>
 </div>
 
 Choose a flag and a comparison method to see its three closest or most different matches. “Overall” combines color mix, pattern, and width-to-height ratio; the other options isolate one of those features.
@@ -146,31 +146,31 @@ Choose a flag and a comparison method to see its three closest or most different
 </style>
 
 <div class="flag-matcher">
-  <div class="flag-controls">
-    <label for="target-flag">Your flag
-      <select id="target-flag"></select>
-    </label>
-    <label for="compare-by">Compare
-      <select id="compare-by">
-        <option value="overall">Overall</option>
-        <option value="color">Color mix</option>
-        <option value="pattern">Pattern / color placement</option>
-        <option value="shape">Shape (width-to-height ratio)</option>
-      </select>
-    </label>
-    <label for="match-order">Find
-      <select id="match-order">
-        <option value="closest">Three closest</option>
-        <option value="farthest">Three most different</option>
-      </select>
-    </label>
-  </div>
-  <p id="match-status" role="status">Preparing flag comparisons…</p>
-  <div id="match-results" class="match-grid" aria-live="polite"></div>
+<div class="flag-controls">
+<label for="target-flag">Your flag
+<select id="target-flag"></select>
+</label>
+<label for="compare-by">Compare
+<select id="compare-by">
+<option value="overall">Overall</option>
+<option value="color">Color mix</option>
+<option value="pattern">Pattern / color placement</option>
+<option value="shape">Shape (width-to-height ratio)</option>
+</select>
+</label>
+<label for="match-order">Find
+<select id="match-order">
+<option value="closest">Three closest</option>
+<option value="farthest">Three most different</option>
+</select>
+</label>
+</div>
+<p id="match-status" role="status">Preparing flag comparisons…</p>
+<div id="match-results" class="match-grid" aria-live="polite"></div>
 </div>
 
 <details>
-  <summary>Browse all flags</summary>
+<summary>Browse all flags</summary>
 ```{r}
 #| echo: false
 #| results: asis
