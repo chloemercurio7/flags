@@ -22,16 +22,13 @@ format: html
 </style>
 
 ```{r}
+#| echo: false
 #| results: asis
-flags <- sort(list.files(pattern = "^[a-z]{2}\\.png$"))
-
-cat('<div class="flag-grid">')
-for (flag in flags) {
-  code <- tools::file_path_sans_ext(flag)
-  cat(sprintf(
-    '<figure><img src="%s" alt="Flag of %s"><figcaption>%s</figcaption></figure>',
-    flag, toupper(code), toupper(code)
-  ))
-}
-cat('</div>')
+flags <- sort(list.files(pattern = "^[a-z]{2}(-[a-z]{3})?\\.png$"))
+codes <- toupper(sub("\\.png$", "", flags))
+items <- sprintf(
+  '<figure><img src="%s" alt="Flag of %s"><figcaption>%s</figcaption></figure>',
+  flags, codes, codes
+)
+cat('<div class="flag-grid">\n', paste(items, collapse = "\n"), '\n</div>\n', sep = "")
 ```
