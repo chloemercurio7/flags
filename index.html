@@ -69,7 +69,61 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Choose a flag and a comparison method to see its three closest or most different matches. “Overall” combines color mix, pattern, and width-to-height ratio; the other options isolate one of those features.</p>
 <style>
+.flag-matcher {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #f4f6f8;
+  border-radius: 0.5rem;
+}
+
+.flag-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: end;
+}
+
+.flag-controls label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+.flag-controls select,
+.flag-controls button {
+  padding: 0.5rem;
+  font: inherit;
+}
+
+#match-status {
+  min-height: 1.5em;
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.match-grid figure {
+  margin: 0;
+  padding: 0.75rem;
+  background: white;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+
+.match-grid img {
+  width: 100%;
+  height: auto;
+}
+
+#flag-gallery {
+  margin-top: 1rem;
+}
+
 .flag-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -86,1532 +140,1696 @@ ul.task-list li input[type="checkbox"] {
   height: auto;
 }
 </style>
-<div class="flag-grid">
+<div class="flag-matcher">
+<div class="flag-controls">
+<pre><code>&lt;label for="target-flag"&gt;Your flag
+  &lt;select id="target-flag"&gt;&lt;/select&gt;
+&lt;/label&gt;
+&lt;label for="compare-by"&gt;Compare
+  &lt;select id="compare-by"&gt;
+    &lt;option value="overall"&gt;Overall&lt;/option&gt;
+    &lt;option value="color"&gt;Color mix&lt;/option&gt;
+    &lt;option value="pattern"&gt;Pattern / color placement&lt;/option&gt;
+    &lt;option value="shape"&gt;Shape (width-to-height ratio)&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/label&gt;
+&lt;label for="match-order"&gt;Find
+  &lt;select id="match-order"&gt;
+    &lt;option value="closest"&gt;Three closest&lt;/option&gt;
+    &lt;option value="farthest"&gt;Three most different&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/label&gt;</code></pre>
+</div>
+<p id="match-status" role="status">
+Preparing flag comparisons…
+</p>
+<div id="match-results" class="match-grid" aria-live="polite">
+
+</div>
+</div>
+<details>
+<summary>
+Browse all flags
+</summary>
+<div id="flag-gallery" class="flag-grid">
 <figure class="figure">
-<img src="ad.png" alt="Flag of AD" class="figure-img">
+<img src="ad.png" alt="Flag of AD" loading="lazy" class="figure-img">
 <figcaption>
 AD
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ae.png" alt="Flag of AE" class="figure-img">
+<img src="ae.png" alt="Flag of AE" loading="lazy" class="figure-img">
 <figcaption>
 AE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="af.png" alt="Flag of AF" class="figure-img">
+<img src="af.png" alt="Flag of AF" loading="lazy" class="figure-img">
 <figcaption>
 AF
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ag.png" alt="Flag of AG" class="figure-img">
+<img src="ag.png" alt="Flag of AG" loading="lazy" class="figure-img">
 <figcaption>
 AG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ai.png" alt="Flag of AI" class="figure-img">
+<img src="ai.png" alt="Flag of AI" loading="lazy" class="figure-img">
 <figcaption>
 AI
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="al.png" alt="Flag of AL" class="figure-img">
+<img src="al.png" alt="Flag of AL" loading="lazy" class="figure-img">
 <figcaption>
 AL
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="am.png" alt="Flag of AM" class="figure-img">
+<img src="am.png" alt="Flag of AM" loading="lazy" class="figure-img">
 <figcaption>
 AM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ao.png" alt="Flag of AO" class="figure-img">
+<img src="ao.png" alt="Flag of AO" loading="lazy" class="figure-img">
 <figcaption>
 AO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="aq.png" alt="Flag of AQ" class="figure-img">
+<img src="aq.png" alt="Flag of AQ" loading="lazy" class="figure-img">
 <figcaption>
 AQ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ar.png" alt="Flag of AR" class="figure-img">
+<img src="ar.png" alt="Flag of AR" loading="lazy" class="figure-img">
 <figcaption>
 AR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="as.png" alt="Flag of AS" class="figure-img">
+<img src="as.png" alt="Flag of AS" loading="lazy" class="figure-img">
 <figcaption>
 AS
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="at.png" alt="Flag of AT" class="figure-img">
+<img src="at.png" alt="Flag of AT" loading="lazy" class="figure-img">
 <figcaption>
 AT
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="au.png" alt="Flag of AU" class="figure-img">
+<img src="au.png" alt="Flag of AU" loading="lazy" class="figure-img">
 <figcaption>
 AU
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="aw.png" alt="Flag of AW" class="figure-img">
+<img src="aw.png" alt="Flag of AW" loading="lazy" class="figure-img">
 <figcaption>
 AW
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ax.png" alt="Flag of AX" class="figure-img">
+<img src="ax.png" alt="Flag of AX" loading="lazy" class="figure-img">
 <figcaption>
 AX
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="az.png" alt="Flag of AZ" class="figure-img">
+<img src="az.png" alt="Flag of AZ" loading="lazy" class="figure-img">
 <figcaption>
 AZ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ba.png" alt="Flag of BA" class="figure-img">
+<img src="ba.png" alt="Flag of BA" loading="lazy" class="figure-img">
 <figcaption>
 BA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bb.png" alt="Flag of BB" class="figure-img">
+<img src="bb.png" alt="Flag of BB" loading="lazy" class="figure-img">
 <figcaption>
 BB
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bd.png" alt="Flag of BD" class="figure-img">
+<img src="bd.png" alt="Flag of BD" loading="lazy" class="figure-img">
 <figcaption>
 BD
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="be.png" alt="Flag of BE" class="figure-img">
+<img src="be.png" alt="Flag of BE" loading="lazy" class="figure-img">
 <figcaption>
 BE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bf.png" alt="Flag of BF" class="figure-img">
+<img src="bf.png" alt="Flag of BF" loading="lazy" class="figure-img">
 <figcaption>
 BF
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bg.png" alt="Flag of BG" class="figure-img">
+<img src="bg.png" alt="Flag of BG" loading="lazy" class="figure-img">
 <figcaption>
 BG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bh.png" alt="Flag of BH" class="figure-img">
+<img src="bh.png" alt="Flag of BH" loading="lazy" class="figure-img">
 <figcaption>
 BH
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bi.png" alt="Flag of BI" class="figure-img">
+<img src="bi.png" alt="Flag of BI" loading="lazy" class="figure-img">
 <figcaption>
 BI
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bj.png" alt="Flag of BJ" class="figure-img">
+<img src="bj.png" alt="Flag of BJ" loading="lazy" class="figure-img">
 <figcaption>
 BJ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bl.png" alt="Flag of BL" class="figure-img">
+<img src="bl.png" alt="Flag of BL" loading="lazy" class="figure-img">
 <figcaption>
 BL
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bm.png" alt="Flag of BM" class="figure-img">
+<img src="bm.png" alt="Flag of BM" loading="lazy" class="figure-img">
 <figcaption>
 BM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bn.png" alt="Flag of BN" class="figure-img">
+<img src="bn.png" alt="Flag of BN" loading="lazy" class="figure-img">
 <figcaption>
 BN
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bo.png" alt="Flag of BO" class="figure-img">
+<img src="bo.png" alt="Flag of BO" loading="lazy" class="figure-img">
 <figcaption>
 BO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bq.png" alt="Flag of BQ" class="figure-img">
+<img src="bq.png" alt="Flag of BQ" loading="lazy" class="figure-img">
 <figcaption>
 BQ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="br.png" alt="Flag of BR" class="figure-img">
+<img src="br.png" alt="Flag of BR" loading="lazy" class="figure-img">
 <figcaption>
 BR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bs.png" alt="Flag of BS" class="figure-img">
+<img src="bs.png" alt="Flag of BS" loading="lazy" class="figure-img">
 <figcaption>
 BS
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bt.png" alt="Flag of BT" class="figure-img">
+<img src="bt.png" alt="Flag of BT" loading="lazy" class="figure-img">
 <figcaption>
 BT
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bv.png" alt="Flag of BV" class="figure-img">
+<img src="bv.png" alt="Flag of BV" loading="lazy" class="figure-img">
 <figcaption>
 BV
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bw.png" alt="Flag of BW" class="figure-img">
+<img src="bw.png" alt="Flag of BW" loading="lazy" class="figure-img">
 <figcaption>
 BW
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="by.png" alt="Flag of BY" class="figure-img">
+<img src="by.png" alt="Flag of BY" loading="lazy" class="figure-img">
 <figcaption>
 BY
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="bz.png" alt="Flag of BZ" class="figure-img">
+<img src="bz.png" alt="Flag of BZ" loading="lazy" class="figure-img">
 <figcaption>
 BZ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ca.png" alt="Flag of CA" class="figure-img">
+<img src="ca.png" alt="Flag of CA" loading="lazy" class="figure-img">
 <figcaption>
 CA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cc.png" alt="Flag of CC" class="figure-img">
+<img src="cc.png" alt="Flag of CC" loading="lazy" class="figure-img">
 <figcaption>
 CC
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cd.png" alt="Flag of CD" class="figure-img">
+<img src="cd.png" alt="Flag of CD" loading="lazy" class="figure-img">
 <figcaption>
 CD
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cf.png" alt="Flag of CF" class="figure-img">
+<img src="cf.png" alt="Flag of CF" loading="lazy" class="figure-img">
 <figcaption>
 CF
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cg.png" alt="Flag of CG" class="figure-img">
+<img src="cg.png" alt="Flag of CG" loading="lazy" class="figure-img">
 <figcaption>
 CG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ch.png" alt="Flag of CH" class="figure-img">
+<img src="ch.png" alt="Flag of CH" loading="lazy" class="figure-img">
 <figcaption>
 CH
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ci.png" alt="Flag of CI" class="figure-img">
+<img src="ci.png" alt="Flag of CI" loading="lazy" class="figure-img">
 <figcaption>
 CI
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ck.png" alt="Flag of CK" class="figure-img">
+<img src="ck.png" alt="Flag of CK" loading="lazy" class="figure-img">
 <figcaption>
 CK
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cl.png" alt="Flag of CL" class="figure-img">
+<img src="cl.png" alt="Flag of CL" loading="lazy" class="figure-img">
 <figcaption>
 CL
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cm.png" alt="Flag of CM" class="figure-img">
+<img src="cm.png" alt="Flag of CM" loading="lazy" class="figure-img">
 <figcaption>
 CM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cn.png" alt="Flag of CN" class="figure-img">
+<img src="cn.png" alt="Flag of CN" loading="lazy" class="figure-img">
 <figcaption>
 CN
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="co.png" alt="Flag of CO" class="figure-img">
+<img src="co.png" alt="Flag of CO" loading="lazy" class="figure-img">
 <figcaption>
 CO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cr.png" alt="Flag of CR" class="figure-img">
+<img src="cr.png" alt="Flag of CR" loading="lazy" class="figure-img">
 <figcaption>
 CR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cu.png" alt="Flag of CU" class="figure-img">
+<img src="cu.png" alt="Flag of CU" loading="lazy" class="figure-img">
 <figcaption>
 CU
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cv.png" alt="Flag of CV" class="figure-img">
+<img src="cv.png" alt="Flag of CV" loading="lazy" class="figure-img">
 <figcaption>
 CV
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cw.png" alt="Flag of CW" class="figure-img">
+<img src="cw.png" alt="Flag of CW" loading="lazy" class="figure-img">
 <figcaption>
 CW
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cx.png" alt="Flag of CX" class="figure-img">
+<img src="cx.png" alt="Flag of CX" loading="lazy" class="figure-img">
 <figcaption>
 CX
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cy.png" alt="Flag of CY" class="figure-img">
+<img src="cy.png" alt="Flag of CY" loading="lazy" class="figure-img">
 <figcaption>
 CY
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="cz.png" alt="Flag of CZ" class="figure-img">
+<img src="cz.png" alt="Flag of CZ" loading="lazy" class="figure-img">
 <figcaption>
 CZ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="de.png" alt="Flag of DE" class="figure-img">
+<img src="de.png" alt="Flag of DE" loading="lazy" class="figure-img">
 <figcaption>
 DE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="dj.png" alt="Flag of DJ" class="figure-img">
+<img src="dj.png" alt="Flag of DJ" loading="lazy" class="figure-img">
 <figcaption>
 DJ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="dk.png" alt="Flag of DK" class="figure-img">
+<img src="dk.png" alt="Flag of DK" loading="lazy" class="figure-img">
 <figcaption>
 DK
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="dm.png" alt="Flag of DM" class="figure-img">
+<img src="dm.png" alt="Flag of DM" loading="lazy" class="figure-img">
 <figcaption>
 DM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="do.png" alt="Flag of DO" class="figure-img">
+<img src="do.png" alt="Flag of DO" loading="lazy" class="figure-img">
 <figcaption>
 DO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="dz.png" alt="Flag of DZ" class="figure-img">
+<img src="dz.png" alt="Flag of DZ" loading="lazy" class="figure-img">
 <figcaption>
 DZ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ec.png" alt="Flag of EC" class="figure-img">
+<img src="ec.png" alt="Flag of EC" loading="lazy" class="figure-img">
 <figcaption>
 EC
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ee.png" alt="Flag of EE" class="figure-img">
+<img src="ee.png" alt="Flag of EE" loading="lazy" class="figure-img">
 <figcaption>
 EE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="eg.png" alt="Flag of EG" class="figure-img">
+<img src="eg.png" alt="Flag of EG" loading="lazy" class="figure-img">
 <figcaption>
 EG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="eh.png" alt="Flag of EH" class="figure-img">
+<img src="eh.png" alt="Flag of EH" loading="lazy" class="figure-img">
 <figcaption>
 EH
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="er.png" alt="Flag of ER" class="figure-img">
+<img src="er.png" alt="Flag of ER" loading="lazy" class="figure-img">
 <figcaption>
 ER
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="es.png" alt="Flag of ES" class="figure-img">
+<img src="es.png" alt="Flag of ES" loading="lazy" class="figure-img">
 <figcaption>
 ES
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="et.png" alt="Flag of ET" class="figure-img">
+<img src="et.png" alt="Flag of ET" loading="lazy" class="figure-img">
 <figcaption>
 ET
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="fi.png" alt="Flag of FI" class="figure-img">
+<img src="fi.png" alt="Flag of FI" loading="lazy" class="figure-img">
 <figcaption>
 FI
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="fj.png" alt="Flag of FJ" class="figure-img">
+<img src="fj.png" alt="Flag of FJ" loading="lazy" class="figure-img">
 <figcaption>
 FJ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="fk.png" alt="Flag of FK" class="figure-img">
+<img src="fk.png" alt="Flag of FK" loading="lazy" class="figure-img">
 <figcaption>
 FK
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="fm.png" alt="Flag of FM" class="figure-img">
+<img src="fm.png" alt="Flag of FM" loading="lazy" class="figure-img">
 <figcaption>
 FM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="fo.png" alt="Flag of FO" class="figure-img">
+<img src="fo.png" alt="Flag of FO" loading="lazy" class="figure-img">
 <figcaption>
 FO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="fr.png" alt="Flag of FR" class="figure-img">
+<img src="fr.png" alt="Flag of FR" loading="lazy" class="figure-img">
 <figcaption>
 FR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ga.png" alt="Flag of GA" class="figure-img">
+<img src="ga.png" alt="Flag of GA" loading="lazy" class="figure-img">
 <figcaption>
 GA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gb-eng.png" alt="Flag of GB-ENG" class="figure-img">
+<img src="gb-eng.png" alt="Flag of GB-ENG" loading="lazy" class="figure-img">
 <figcaption>
 GB-ENG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gb-nir.png" alt="Flag of GB-NIR" class="figure-img">
+<img src="gb-nir.png" alt="Flag of GB-NIR" loading="lazy" class="figure-img">
 <figcaption>
 GB-NIR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gb-sct.png" alt="Flag of GB-SCT" class="figure-img">
+<img src="gb-sct.png" alt="Flag of GB-SCT" loading="lazy" class="figure-img">
 <figcaption>
 GB-SCT
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gb-wls.png" alt="Flag of GB-WLS" class="figure-img">
+<img src="gb-wls.png" alt="Flag of GB-WLS" loading="lazy" class="figure-img">
 <figcaption>
 GB-WLS
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gb.png" alt="Flag of GB" class="figure-img">
+<img src="gb.png" alt="Flag of GB" loading="lazy" class="figure-img">
 <figcaption>
 GB
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gd.png" alt="Flag of GD" class="figure-img">
+<img src="gd.png" alt="Flag of GD" loading="lazy" class="figure-img">
 <figcaption>
 GD
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ge.png" alt="Flag of GE" class="figure-img">
+<img src="ge.png" alt="Flag of GE" loading="lazy" class="figure-img">
 <figcaption>
 GE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gf.png" alt="Flag of GF" class="figure-img">
+<img src="gf.png" alt="Flag of GF" loading="lazy" class="figure-img">
 <figcaption>
 GF
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gg.png" alt="Flag of GG" class="figure-img">
+<img src="gg.png" alt="Flag of GG" loading="lazy" class="figure-img">
 <figcaption>
 GG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gh.png" alt="Flag of GH" class="figure-img">
+<img src="gh.png" alt="Flag of GH" loading="lazy" class="figure-img">
 <figcaption>
 GH
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gi.png" alt="Flag of GI" class="figure-img">
+<img src="gi.png" alt="Flag of GI" loading="lazy" class="figure-img">
 <figcaption>
 GI
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gl.png" alt="Flag of GL" class="figure-img">
+<img src="gl.png" alt="Flag of GL" loading="lazy" class="figure-img">
 <figcaption>
 GL
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gm.png" alt="Flag of GM" class="figure-img">
+<img src="gm.png" alt="Flag of GM" loading="lazy" class="figure-img">
 <figcaption>
 GM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gn.png" alt="Flag of GN" class="figure-img">
+<img src="gn.png" alt="Flag of GN" loading="lazy" class="figure-img">
 <figcaption>
 GN
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gp.png" alt="Flag of GP" class="figure-img">
+<img src="gp.png" alt="Flag of GP" loading="lazy" class="figure-img">
 <figcaption>
 GP
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gq.png" alt="Flag of GQ" class="figure-img">
+<img src="gq.png" alt="Flag of GQ" loading="lazy" class="figure-img">
 <figcaption>
 GQ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gr.png" alt="Flag of GR" class="figure-img">
+<img src="gr.png" alt="Flag of GR" loading="lazy" class="figure-img">
 <figcaption>
 GR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gs.png" alt="Flag of GS" class="figure-img">
+<img src="gs.png" alt="Flag of GS" loading="lazy" class="figure-img">
 <figcaption>
 GS
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gt.png" alt="Flag of GT" class="figure-img">
+<img src="gt.png" alt="Flag of GT" loading="lazy" class="figure-img">
 <figcaption>
 GT
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gu.png" alt="Flag of GU" class="figure-img">
+<img src="gu.png" alt="Flag of GU" loading="lazy" class="figure-img">
 <figcaption>
 GU
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gw.png" alt="Flag of GW" class="figure-img">
+<img src="gw.png" alt="Flag of GW" loading="lazy" class="figure-img">
 <figcaption>
 GW
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="gy.png" alt="Flag of GY" class="figure-img">
+<img src="gy.png" alt="Flag of GY" loading="lazy" class="figure-img">
 <figcaption>
 GY
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="hk.png" alt="Flag of HK" class="figure-img">
+<img src="hk.png" alt="Flag of HK" loading="lazy" class="figure-img">
 <figcaption>
 HK
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="hm.png" alt="Flag of HM" class="figure-img">
+<img src="hm.png" alt="Flag of HM" loading="lazy" class="figure-img">
 <figcaption>
 HM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="hn.png" alt="Flag of HN" class="figure-img">
+<img src="hn.png" alt="Flag of HN" loading="lazy" class="figure-img">
 <figcaption>
 HN
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="hr.png" alt="Flag of HR" class="figure-img">
+<img src="hr.png" alt="Flag of HR" loading="lazy" class="figure-img">
 <figcaption>
 HR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ht.png" alt="Flag of HT" class="figure-img">
+<img src="ht.png" alt="Flag of HT" loading="lazy" class="figure-img">
 <figcaption>
 HT
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="hu.png" alt="Flag of HU" class="figure-img">
+<img src="hu.png" alt="Flag of HU" loading="lazy" class="figure-img">
 <figcaption>
 HU
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="id.png" alt="Flag of ID" class="figure-img">
+<img src="id.png" alt="Flag of ID" loading="lazy" class="figure-img">
 <figcaption>
 ID
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ie.png" alt="Flag of IE" class="figure-img">
+<img src="ie.png" alt="Flag of IE" loading="lazy" class="figure-img">
 <figcaption>
 IE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="il.png" alt="Flag of IL" class="figure-img">
+<img src="il.png" alt="Flag of IL" loading="lazy" class="figure-img">
 <figcaption>
 IL
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="im.png" alt="Flag of IM" class="figure-img">
+<img src="im.png" alt="Flag of IM" loading="lazy" class="figure-img">
 <figcaption>
 IM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="in.png" alt="Flag of IN" class="figure-img">
+<img src="in.png" alt="Flag of IN" loading="lazy" class="figure-img">
 <figcaption>
 IN
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="io.png" alt="Flag of IO" class="figure-img">
+<img src="io.png" alt="Flag of IO" loading="lazy" class="figure-img">
 <figcaption>
 IO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="iq.png" alt="Flag of IQ" class="figure-img">
+<img src="iq.png" alt="Flag of IQ" loading="lazy" class="figure-img">
 <figcaption>
 IQ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ir.png" alt="Flag of IR" class="figure-img">
+<img src="ir.png" alt="Flag of IR" loading="lazy" class="figure-img">
 <figcaption>
 IR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="is.png" alt="Flag of IS" class="figure-img">
+<img src="is.png" alt="Flag of IS" loading="lazy" class="figure-img">
 <figcaption>
 IS
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="it.png" alt="Flag of IT" class="figure-img">
+<img src="it.png" alt="Flag of IT" loading="lazy" class="figure-img">
 <figcaption>
 IT
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="je.png" alt="Flag of JE" class="figure-img">
+<img src="je.png" alt="Flag of JE" loading="lazy" class="figure-img">
 <figcaption>
 JE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="jm.png" alt="Flag of JM" class="figure-img">
+<img src="jm.png" alt="Flag of JM" loading="lazy" class="figure-img">
 <figcaption>
 JM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="jo.png" alt="Flag of JO" class="figure-img">
+<img src="jo.png" alt="Flag of JO" loading="lazy" class="figure-img">
 <figcaption>
 JO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="jp.png" alt="Flag of JP" class="figure-img">
+<img src="jp.png" alt="Flag of JP" loading="lazy" class="figure-img">
 <figcaption>
 JP
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ke.png" alt="Flag of KE" class="figure-img">
+<img src="ke.png" alt="Flag of KE" loading="lazy" class="figure-img">
 <figcaption>
 KE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="kg.png" alt="Flag of KG" class="figure-img">
+<img src="kg.png" alt="Flag of KG" loading="lazy" class="figure-img">
 <figcaption>
 KG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="kh.png" alt="Flag of KH" class="figure-img">
+<img src="kh.png" alt="Flag of KH" loading="lazy" class="figure-img">
 <figcaption>
 KH
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ki.png" alt="Flag of KI" class="figure-img">
+<img src="ki.png" alt="Flag of KI" loading="lazy" class="figure-img">
 <figcaption>
 KI
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="km.png" alt="Flag of KM" class="figure-img">
+<img src="km.png" alt="Flag of KM" loading="lazy" class="figure-img">
 <figcaption>
 KM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="kn.png" alt="Flag of KN" class="figure-img">
+<img src="kn.png" alt="Flag of KN" loading="lazy" class="figure-img">
 <figcaption>
 KN
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="kp.png" alt="Flag of KP" class="figure-img">
+<img src="kp.png" alt="Flag of KP" loading="lazy" class="figure-img">
 <figcaption>
 KP
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="kr.png" alt="Flag of KR" class="figure-img">
+<img src="kr.png" alt="Flag of KR" loading="lazy" class="figure-img">
 <figcaption>
 KR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="kw.png" alt="Flag of KW" class="figure-img">
+<img src="kw.png" alt="Flag of KW" loading="lazy" class="figure-img">
 <figcaption>
 KW
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ky.png" alt="Flag of KY" class="figure-img">
+<img src="ky.png" alt="Flag of KY" loading="lazy" class="figure-img">
 <figcaption>
 KY
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="kz.png" alt="Flag of KZ" class="figure-img">
+<img src="kz.png" alt="Flag of KZ" loading="lazy" class="figure-img">
 <figcaption>
 KZ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="la.png" alt="Flag of LA" class="figure-img">
+<img src="la.png" alt="Flag of LA" loading="lazy" class="figure-img">
 <figcaption>
 LA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="lb.png" alt="Flag of LB" class="figure-img">
+<img src="lb.png" alt="Flag of LB" loading="lazy" class="figure-img">
 <figcaption>
 LB
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="lc.png" alt="Flag of LC" class="figure-img">
+<img src="lc.png" alt="Flag of LC" loading="lazy" class="figure-img">
 <figcaption>
 LC
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="li.png" alt="Flag of LI" class="figure-img">
+<img src="li.png" alt="Flag of LI" loading="lazy" class="figure-img">
 <figcaption>
 LI
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="lk.png" alt="Flag of LK" class="figure-img">
+<img src="lk.png" alt="Flag of LK" loading="lazy" class="figure-img">
 <figcaption>
 LK
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="lr.png" alt="Flag of LR" class="figure-img">
+<img src="lr.png" alt="Flag of LR" loading="lazy" class="figure-img">
 <figcaption>
 LR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ls.png" alt="Flag of LS" class="figure-img">
+<img src="ls.png" alt="Flag of LS" loading="lazy" class="figure-img">
 <figcaption>
 LS
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="lt.png" alt="Flag of LT" class="figure-img">
+<img src="lt.png" alt="Flag of LT" loading="lazy" class="figure-img">
 <figcaption>
 LT
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="lu.png" alt="Flag of LU" class="figure-img">
+<img src="lu.png" alt="Flag of LU" loading="lazy" class="figure-img">
 <figcaption>
 LU
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="lv.png" alt="Flag of LV" class="figure-img">
+<img src="lv.png" alt="Flag of LV" loading="lazy" class="figure-img">
 <figcaption>
 LV
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ly.png" alt="Flag of LY" class="figure-img">
+<img src="ly.png" alt="Flag of LY" loading="lazy" class="figure-img">
 <figcaption>
 LY
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ma.png" alt="Flag of MA" class="figure-img">
+<img src="ma.png" alt="Flag of MA" loading="lazy" class="figure-img">
 <figcaption>
 MA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mc.png" alt="Flag of MC" class="figure-img">
+<img src="mc.png" alt="Flag of MC" loading="lazy" class="figure-img">
 <figcaption>
 MC
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="md.png" alt="Flag of MD" class="figure-img">
+<img src="md.png" alt="Flag of MD" loading="lazy" class="figure-img">
 <figcaption>
 MD
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="me.png" alt="Flag of ME" class="figure-img">
+<img src="me.png" alt="Flag of ME" loading="lazy" class="figure-img">
 <figcaption>
 ME
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mf.png" alt="Flag of MF" class="figure-img">
+<img src="mf.png" alt="Flag of MF" loading="lazy" class="figure-img">
 <figcaption>
 MF
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mg.png" alt="Flag of MG" class="figure-img">
+<img src="mg.png" alt="Flag of MG" loading="lazy" class="figure-img">
 <figcaption>
 MG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mh.png" alt="Flag of MH" class="figure-img">
+<img src="mh.png" alt="Flag of MH" loading="lazy" class="figure-img">
 <figcaption>
 MH
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mk.png" alt="Flag of MK" class="figure-img">
+<img src="mk.png" alt="Flag of MK" loading="lazy" class="figure-img">
 <figcaption>
 MK
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ml.png" alt="Flag of ML" class="figure-img">
+<img src="ml.png" alt="Flag of ML" loading="lazy" class="figure-img">
 <figcaption>
 ML
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mm.png" alt="Flag of MM" class="figure-img">
+<img src="mm.png" alt="Flag of MM" loading="lazy" class="figure-img">
 <figcaption>
 MM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mn.png" alt="Flag of MN" class="figure-img">
+<img src="mn.png" alt="Flag of MN" loading="lazy" class="figure-img">
 <figcaption>
 MN
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mo.png" alt="Flag of MO" class="figure-img">
+<img src="mo.png" alt="Flag of MO" loading="lazy" class="figure-img">
 <figcaption>
 MO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mp.png" alt="Flag of MP" class="figure-img">
+<img src="mp.png" alt="Flag of MP" loading="lazy" class="figure-img">
 <figcaption>
 MP
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mq.png" alt="Flag of MQ" class="figure-img">
+<img src="mq.png" alt="Flag of MQ" loading="lazy" class="figure-img">
 <figcaption>
 MQ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mr.png" alt="Flag of MR" class="figure-img">
+<img src="mr.png" alt="Flag of MR" loading="lazy" class="figure-img">
 <figcaption>
 MR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ms.png" alt="Flag of MS" class="figure-img">
+<img src="ms.png" alt="Flag of MS" loading="lazy" class="figure-img">
 <figcaption>
 MS
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mt.png" alt="Flag of MT" class="figure-img">
+<img src="mt.png" alt="Flag of MT" loading="lazy" class="figure-img">
 <figcaption>
 MT
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mu.png" alt="Flag of MU" class="figure-img">
+<img src="mu.png" alt="Flag of MU" loading="lazy" class="figure-img">
 <figcaption>
 MU
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mv.png" alt="Flag of MV" class="figure-img">
+<img src="mv.png" alt="Flag of MV" loading="lazy" class="figure-img">
 <figcaption>
 MV
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mw.png" alt="Flag of MW" class="figure-img">
+<img src="mw.png" alt="Flag of MW" loading="lazy" class="figure-img">
 <figcaption>
 MW
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mx.png" alt="Flag of MX" class="figure-img">
+<img src="mx.png" alt="Flag of MX" loading="lazy" class="figure-img">
 <figcaption>
 MX
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="my.png" alt="Flag of MY" class="figure-img">
+<img src="my.png" alt="Flag of MY" loading="lazy" class="figure-img">
 <figcaption>
 MY
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="mz.png" alt="Flag of MZ" class="figure-img">
+<img src="mz.png" alt="Flag of MZ" loading="lazy" class="figure-img">
 <figcaption>
 MZ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="na.png" alt="Flag of NA" class="figure-img">
+<img src="na.png" alt="Flag of NA" loading="lazy" class="figure-img">
 <figcaption>
 NA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="nc.png" alt="Flag of NC" class="figure-img">
+<img src="nc.png" alt="Flag of NC" loading="lazy" class="figure-img">
 <figcaption>
 NC
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ne.png" alt="Flag of NE" class="figure-img">
+<img src="ne.png" alt="Flag of NE" loading="lazy" class="figure-img">
 <figcaption>
 NE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="nf.png" alt="Flag of NF" class="figure-img">
+<img src="nf.png" alt="Flag of NF" loading="lazy" class="figure-img">
 <figcaption>
 NF
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ng.png" alt="Flag of NG" class="figure-img">
+<img src="ng.png" alt="Flag of NG" loading="lazy" class="figure-img">
 <figcaption>
 NG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ni.png" alt="Flag of NI" class="figure-img">
+<img src="ni.png" alt="Flag of NI" loading="lazy" class="figure-img">
 <figcaption>
 NI
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="nl.png" alt="Flag of NL" class="figure-img">
+<img src="nl.png" alt="Flag of NL" loading="lazy" class="figure-img">
 <figcaption>
 NL
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="no.png" alt="Flag of NO" class="figure-img">
+<img src="no.png" alt="Flag of NO" loading="lazy" class="figure-img">
 <figcaption>
 NO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="np.png" alt="Flag of NP" class="figure-img">
+<img src="np.png" alt="Flag of NP" loading="lazy" class="figure-img">
 <figcaption>
 NP
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="nr.png" alt="Flag of NR" class="figure-img">
+<img src="nr.png" alt="Flag of NR" loading="lazy" class="figure-img">
 <figcaption>
 NR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="nu.png" alt="Flag of NU" class="figure-img">
+<img src="nu.png" alt="Flag of NU" loading="lazy" class="figure-img">
 <figcaption>
 NU
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="nz.png" alt="Flag of NZ" class="figure-img">
+<img src="nz.png" alt="Flag of NZ" loading="lazy" class="figure-img">
 <figcaption>
 NZ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="om.png" alt="Flag of OM" class="figure-img">
+<img src="om.png" alt="Flag of OM" loading="lazy" class="figure-img">
 <figcaption>
 OM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="pa.png" alt="Flag of PA" class="figure-img">
+<img src="pa.png" alt="Flag of PA" loading="lazy" class="figure-img">
 <figcaption>
 PA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="pe.png" alt="Flag of PE" class="figure-img">
+<img src="pe.png" alt="Flag of PE" loading="lazy" class="figure-img">
 <figcaption>
 PE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="pf.png" alt="Flag of PF" class="figure-img">
+<img src="pf.png" alt="Flag of PF" loading="lazy" class="figure-img">
 <figcaption>
 PF
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="pg.png" alt="Flag of PG" class="figure-img">
+<img src="pg.png" alt="Flag of PG" loading="lazy" class="figure-img">
 <figcaption>
 PG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ph.png" alt="Flag of PH" class="figure-img">
+<img src="ph.png" alt="Flag of PH" loading="lazy" class="figure-img">
 <figcaption>
 PH
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="pk.png" alt="Flag of PK" class="figure-img">
+<img src="pk.png" alt="Flag of PK" loading="lazy" class="figure-img">
 <figcaption>
 PK
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="pl.png" alt="Flag of PL" class="figure-img">
+<img src="pl.png" alt="Flag of PL" loading="lazy" class="figure-img">
 <figcaption>
 PL
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="pm.png" alt="Flag of PM" class="figure-img">
+<img src="pm.png" alt="Flag of PM" loading="lazy" class="figure-img">
 <figcaption>
 PM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="pn.png" alt="Flag of PN" class="figure-img">
+<img src="pn.png" alt="Flag of PN" loading="lazy" class="figure-img">
 <figcaption>
 PN
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="pr.png" alt="Flag of PR" class="figure-img">
+<img src="pr.png" alt="Flag of PR" loading="lazy" class="figure-img">
 <figcaption>
 PR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ps.png" alt="Flag of PS" class="figure-img">
+<img src="ps.png" alt="Flag of PS" loading="lazy" class="figure-img">
 <figcaption>
 PS
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="pt.png" alt="Flag of PT" class="figure-img">
+<img src="pt.png" alt="Flag of PT" loading="lazy" class="figure-img">
 <figcaption>
 PT
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="pw.png" alt="Flag of PW" class="figure-img">
+<img src="pw.png" alt="Flag of PW" loading="lazy" class="figure-img">
 <figcaption>
 PW
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="py.png" alt="Flag of PY" class="figure-img">
+<img src="py.png" alt="Flag of PY" loading="lazy" class="figure-img">
 <figcaption>
 PY
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="qa.png" alt="Flag of QA" class="figure-img">
+<img src="qa.png" alt="Flag of QA" loading="lazy" class="figure-img">
 <figcaption>
 QA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="re.png" alt="Flag of RE" class="figure-img">
+<img src="re.png" alt="Flag of RE" loading="lazy" class="figure-img">
 <figcaption>
 RE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ro.png" alt="Flag of RO" class="figure-img">
+<img src="ro.png" alt="Flag of RO" loading="lazy" class="figure-img">
 <figcaption>
 RO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="rs.png" alt="Flag of RS" class="figure-img">
+<img src="rs.png" alt="Flag of RS" loading="lazy" class="figure-img">
 <figcaption>
 RS
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ru.png" alt="Flag of RU" class="figure-img">
+<img src="ru.png" alt="Flag of RU" loading="lazy" class="figure-img">
 <figcaption>
 RU
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="rw.png" alt="Flag of RW" class="figure-img">
+<img src="rw.png" alt="Flag of RW" loading="lazy" class="figure-img">
 <figcaption>
 RW
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sa.png" alt="Flag of SA" class="figure-img">
+<img src="sa.png" alt="Flag of SA" loading="lazy" class="figure-img">
 <figcaption>
 SA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sb.png" alt="Flag of SB" class="figure-img">
+<img src="sb.png" alt="Flag of SB" loading="lazy" class="figure-img">
 <figcaption>
 SB
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sc.png" alt="Flag of SC" class="figure-img">
+<img src="sc.png" alt="Flag of SC" loading="lazy" class="figure-img">
 <figcaption>
 SC
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sd.png" alt="Flag of SD" class="figure-img">
+<img src="sd.png" alt="Flag of SD" loading="lazy" class="figure-img">
 <figcaption>
 SD
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="se.png" alt="Flag of SE" class="figure-img">
+<img src="se.png" alt="Flag of SE" loading="lazy" class="figure-img">
 <figcaption>
 SE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sg.png" alt="Flag of SG" class="figure-img">
+<img src="sg.png" alt="Flag of SG" loading="lazy" class="figure-img">
 <figcaption>
 SG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sh.png" alt="Flag of SH" class="figure-img">
+<img src="sh.png" alt="Flag of SH" loading="lazy" class="figure-img">
 <figcaption>
 SH
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="si.png" alt="Flag of SI" class="figure-img">
+<img src="si.png" alt="Flag of SI" loading="lazy" class="figure-img">
 <figcaption>
 SI
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sj.png" alt="Flag of SJ" class="figure-img">
+<img src="sj.png" alt="Flag of SJ" loading="lazy" class="figure-img">
 <figcaption>
 SJ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sk.png" alt="Flag of SK" class="figure-img">
+<img src="sk.png" alt="Flag of SK" loading="lazy" class="figure-img">
 <figcaption>
 SK
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sl.png" alt="Flag of SL" class="figure-img">
+<img src="sl.png" alt="Flag of SL" loading="lazy" class="figure-img">
 <figcaption>
 SL
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sm.png" alt="Flag of SM" class="figure-img">
+<img src="sm.png" alt="Flag of SM" loading="lazy" class="figure-img">
 <figcaption>
 SM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sn.png" alt="Flag of SN" class="figure-img">
+<img src="sn.png" alt="Flag of SN" loading="lazy" class="figure-img">
 <figcaption>
 SN
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="so.png" alt="Flag of SO" class="figure-img">
+<img src="so.png" alt="Flag of SO" loading="lazy" class="figure-img">
 <figcaption>
 SO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sr.png" alt="Flag of SR" class="figure-img">
+<img src="sr.png" alt="Flag of SR" loading="lazy" class="figure-img">
 <figcaption>
 SR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ss.png" alt="Flag of SS" class="figure-img">
+<img src="ss.png" alt="Flag of SS" loading="lazy" class="figure-img">
 <figcaption>
 SS
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="st.png" alt="Flag of ST" class="figure-img">
+<img src="st.png" alt="Flag of ST" loading="lazy" class="figure-img">
 <figcaption>
 ST
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sv.png" alt="Flag of SV" class="figure-img">
+<img src="sv.png" alt="Flag of SV" loading="lazy" class="figure-img">
 <figcaption>
 SV
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sx.png" alt="Flag of SX" class="figure-img">
+<img src="sx.png" alt="Flag of SX" loading="lazy" class="figure-img">
 <figcaption>
 SX
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sy.png" alt="Flag of SY" class="figure-img">
+<img src="sy.png" alt="Flag of SY" loading="lazy" class="figure-img">
 <figcaption>
 SY
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="sz.png" alt="Flag of SZ" class="figure-img">
+<img src="sz.png" alt="Flag of SZ" loading="lazy" class="figure-img">
 <figcaption>
 SZ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tc.png" alt="Flag of TC" class="figure-img">
+<img src="tc.png" alt="Flag of TC" loading="lazy" class="figure-img">
 <figcaption>
 TC
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="td.png" alt="Flag of TD" class="figure-img">
+<img src="td.png" alt="Flag of TD" loading="lazy" class="figure-img">
 <figcaption>
 TD
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tf.png" alt="Flag of TF" class="figure-img">
+<img src="tf.png" alt="Flag of TF" loading="lazy" class="figure-img">
 <figcaption>
 TF
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tg.png" alt="Flag of TG" class="figure-img">
+<img src="tg.png" alt="Flag of TG" loading="lazy" class="figure-img">
 <figcaption>
 TG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="th.png" alt="Flag of TH" class="figure-img">
+<img src="th.png" alt="Flag of TH" loading="lazy" class="figure-img">
 <figcaption>
 TH
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tj.png" alt="Flag of TJ" class="figure-img">
+<img src="tj.png" alt="Flag of TJ" loading="lazy" class="figure-img">
 <figcaption>
 TJ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tk.png" alt="Flag of TK" class="figure-img">
+<img src="tk.png" alt="Flag of TK" loading="lazy" class="figure-img">
 <figcaption>
 TK
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tl.png" alt="Flag of TL" class="figure-img">
+<img src="tl.png" alt="Flag of TL" loading="lazy" class="figure-img">
 <figcaption>
 TL
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tm.png" alt="Flag of TM" class="figure-img">
+<img src="tm.png" alt="Flag of TM" loading="lazy" class="figure-img">
 <figcaption>
 TM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tn.png" alt="Flag of TN" class="figure-img">
+<img src="tn.png" alt="Flag of TN" loading="lazy" class="figure-img">
 <figcaption>
 TN
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="to.png" alt="Flag of TO" class="figure-img">
+<img src="to.png" alt="Flag of TO" loading="lazy" class="figure-img">
 <figcaption>
 TO
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tr.png" alt="Flag of TR" class="figure-img">
+<img src="tr.png" alt="Flag of TR" loading="lazy" class="figure-img">
 <figcaption>
 TR
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tt.png" alt="Flag of TT" class="figure-img">
+<img src="tt.png" alt="Flag of TT" loading="lazy" class="figure-img">
 <figcaption>
 TT
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tv.png" alt="Flag of TV" class="figure-img">
+<img src="tv.png" alt="Flag of TV" loading="lazy" class="figure-img">
 <figcaption>
 TV
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tw.png" alt="Flag of TW" class="figure-img">
+<img src="tw.png" alt="Flag of TW" loading="lazy" class="figure-img">
 <figcaption>
 TW
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="tz.png" alt="Flag of TZ" class="figure-img">
+<img src="tz.png" alt="Flag of TZ" loading="lazy" class="figure-img">
 <figcaption>
 TZ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ua.png" alt="Flag of UA" class="figure-img">
+<img src="ua.png" alt="Flag of UA" loading="lazy" class="figure-img">
 <figcaption>
 UA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ug.png" alt="Flag of UG" class="figure-img">
+<img src="ug.png" alt="Flag of UG" loading="lazy" class="figure-img">
 <figcaption>
 UG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="um.png" alt="Flag of UM" class="figure-img">
+<img src="um.png" alt="Flag of UM" loading="lazy" class="figure-img">
 <figcaption>
 UM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="us.png" alt="Flag of US" class="figure-img">
+<img src="us.png" alt="Flag of US" loading="lazy" class="figure-img">
 <figcaption>
 US
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="uy.png" alt="Flag of UY" class="figure-img">
+<img src="uy.png" alt="Flag of UY" loading="lazy" class="figure-img">
 <figcaption>
 UY
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="uz.png" alt="Flag of UZ" class="figure-img">
+<img src="uz.png" alt="Flag of UZ" loading="lazy" class="figure-img">
 <figcaption>
 UZ
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="va.png" alt="Flag of VA" class="figure-img">
+<img src="va.png" alt="Flag of VA" loading="lazy" class="figure-img">
 <figcaption>
 VA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="vc.png" alt="Flag of VC" class="figure-img">
+<img src="vc.png" alt="Flag of VC" loading="lazy" class="figure-img">
 <figcaption>
 VC
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ve.png" alt="Flag of VE" class="figure-img">
+<img src="ve.png" alt="Flag of VE" loading="lazy" class="figure-img">
 <figcaption>
 VE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="vg.png" alt="Flag of VG" class="figure-img">
+<img src="vg.png" alt="Flag of VG" loading="lazy" class="figure-img">
 <figcaption>
 VG
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="vi.png" alt="Flag of VI" class="figure-img">
+<img src="vi.png" alt="Flag of VI" loading="lazy" class="figure-img">
 <figcaption>
 VI
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="vn.png" alt="Flag of VN" class="figure-img">
+<img src="vn.png" alt="Flag of VN" loading="lazy" class="figure-img">
 <figcaption>
 VN
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="vu.png" alt="Flag of VU" class="figure-img">
+<img src="vu.png" alt="Flag of VU" loading="lazy" class="figure-img">
 <figcaption>
 VU
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="wf.png" alt="Flag of WF" class="figure-img">
+<img src="wf.png" alt="Flag of WF" loading="lazy" class="figure-img">
 <figcaption>
 WF
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ws.png" alt="Flag of WS" class="figure-img">
+<img src="ws.png" alt="Flag of WS" loading="lazy" class="figure-img">
 <figcaption>
 WS
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="xk.png" alt="Flag of XK" class="figure-img">
+<img src="xk.png" alt="Flag of XK" loading="lazy" class="figure-img">
 <figcaption>
 XK
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="ye.png" alt="Flag of YE" class="figure-img">
+<img src="ye.png" alt="Flag of YE" loading="lazy" class="figure-img">
 <figcaption>
 YE
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="yt.png" alt="Flag of YT" class="figure-img">
+<img src="yt.png" alt="Flag of YT" loading="lazy" class="figure-img">
 <figcaption>
 YT
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="za.png" alt="Flag of ZA" class="figure-img">
+<img src="za.png" alt="Flag of ZA" loading="lazy" class="figure-img">
 <figcaption>
 ZA
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="zm.png" alt="Flag of ZM" class="figure-img">
+<img src="zm.png" alt="Flag of ZM" loading="lazy" class="figure-img">
 <figcaption>
 ZM
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="zw.png" alt="Flag of ZW" class="figure-img">
+<img src="zw.png" alt="Flag of ZW" loading="lazy" class="figure-img">
 <figcaption>
 ZW
 </figcaption>
 </figure>
 </div>
+</details>
+<script>
+const flagImages = Array.from(document.querySelectorAll("#flag-gallery img"));
+const flagSelect = document.querySelector("#target-flag");
+const compareSelect = document.querySelector("#compare-by");
+const orderSelect = document.querySelector("#match-order");
+const statusMessage = document.querySelector("#match-status");
+const results = document.querySelector("#match-results");
+const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+
+const flags = flagImages.map((image) => {
+  const code = image.alt.replace("Flag of ", "");
+  let name = code;
+  try {
+    name = regionNames.of(code) || code;
+  } catch {
+    name = code;
+  }
+  const option = document.createElement("option");
+  option.value = code;
+  option.textContent = `${name} (${code})`;
+  flagSelect.append(option);
+  return { code, name, src: image.src, ratio: image.naturalWidth / image.naturalHeight };
+});
+
+function extractFeatures(flag, context) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => {
+      flag.ratio = image.naturalWidth / image.naturalHeight;
+      context.clearRect(0, 0, 16, 10);
+      context.drawImage(image, 0, 0, 16, 10);
+      const pixels = context.getImageData(0, 0, 16, 10).data;
+      const grid = [];
+      const histogram = Array(64).fill(0);
+      for (let i = 0; i < pixels.length; i += 4) {
+        const rgb = [pixels[i], pixels[i + 1], pixels[i + 2]];
+        grid.push(...rgb);
+        const bin = (rgb[0] >> 6) * 16 + (rgb[1] >> 6) * 4 + (rgb[2] >> 6);
+        histogram[bin] += 1 / 160;
+      }
+      flag.grid = grid;
+      flag.histogram = histogram;
+      resolve();
+    };
+    image.onerror = () => reject(new Error(`Could not load ${flag.code} flag image`));
+    image.src = flag.src;
+  });
+}
+
+function distance(first, second, method) {
+  if (method === "color" || method === "overall") {
+    let colorDifference = 0;
+    for (let i = 0; i < first.histogram.length; i += 1) {
+      colorDifference += Math.abs(first.histogram[i] - second.histogram[i]);
+    }
+    colorDifference /= 2;
+    if (method === "color") return colorDifference;
+
+    let patternDifference = 0;
+    for (let i = 0; i < first.grid.length; i += 1) {
+      patternDifference += Math.abs(first.grid[i] - second.grid[i]) / 255;
+    }
+    patternDifference /= first.grid.length;
+    const shapeDifference = Math.min(
+      Math.abs(Math.log(first.ratio / second.ratio)) / Math.log(2),
+      1
+    );
+    return 0.4 * colorDifference + 0.45 * patternDifference + 0.15 * shapeDifference;
+  }
+
+  if (method === "pattern") {
+    let difference = 0;
+    for (let i = 0; i < first.grid.length; i += 1) {
+      difference += Math.abs(first.grid[i] - second.grid[i]) / 255;
+    }
+    return difference / first.grid.length;
+  }
+
+  return Math.min(Math.abs(Math.log(first.ratio / second.ratio)) / Math.log(2), 1);
+}
+
+function showMatches() {
+  const selected = flags.find((flag) => flag.code === flagSelect.value);
+  if (!selected?.grid) return;
+  const ranked = flags
+    .filter((flag) => flag !== selected)
+    .map((flag) => ({ flag, score: distance(selected, flag, compareSelect.value) }))
+    .sort((a, b) => a.score - b.score || a.flag.code.localeCompare(b.flag.code));
+  const matches = orderSelect.value === "closest"
+    ? ranked.slice(0, 3)
+    : ranked.slice(-3).reverse();
+
+  results.replaceChildren();
+  for (const { flag, score } of matches) {
+    const figure = document.createElement("figure");
+    const image = document.createElement("img");
+    image.src = flag.src;
+    image.alt = `Flag of ${flag.name}`;
+    const caption = document.createElement("figcaption");
+    caption.textContent = `${flag.name} (${flag.code}) — distance ${score.toFixed(2)}`;
+    figure.append(image, caption);
+    results.append(figure);
+  }
+}
+
+flagSelect.addEventListener("change", showMatches);
+compareSelect.addEventListener("change", showMatches);
+orderSelect.addEventListener("change", showMatches);
+
+async function prepareComparisons() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 16;
+  canvas.height = 10;
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+  let next = 0;
+  async function loadNext() {
+    while (next < flags.length) {
+      const flag = flags[next];
+      next += 1;
+      await extractFeatures(flag, context);
+    }
+  }
+  await Promise.all(Array.from({ length: 4 }, loadNext));
+  statusMessage.textContent = "Ready. Smaller distances mean closer matches.";
+  showMatches();
+}
+
+prepareComparisons().catch((error) => {
+  statusMessage.textContent = "Could not prepare flag comparisons. Try refreshing the page.";
+  console.error(error);
+});
+</script>
 
 </main>
 <!-- /main column -->
