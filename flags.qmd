@@ -3,7 +3,131 @@ title: "Flags of the World"
 format: html
 ---
 
+## Guess the flag
+
+Look at the flag and choose its country or region. How many can you get right?
+
+<div class="flag-game">
+  <div class="game-score" aria-live="polite">
+    Score: <span id="game-score">0</span> / <span id="game-round">0</span>
+  </div>
+  <img id="quiz-flag" class="quiz-flag" alt="Flag to identify">
+  <div id="quiz-choices" class="quiz-choices"></div>
+  <p id="quiz-feedback" role="status">Loading the flag quiz…</p>
+  <button id="quiz-next" type="button" disabled>Next flag</button>
+</div>
+
+Choose a flag and a comparison method to see its three closest or most different matches. “Overall” combines color mix, pattern, and width-to-height ratio; the other options isolate one of those features.
+
 <style>
+.flag-game {
+  max-width: 700px;
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  background: #f4f6f8;
+  border-radius: 0.5rem;
+}
+
+.game-score {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.quiz-flag {
+  display: block;
+  width: min(100%, 480px);
+  max-height: 280px;
+  margin: 0 auto 1rem;
+  object-fit: contain;
+}
+
+.quiz-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.65rem;
+}
+
+.flag-game button {
+  padding: 0.65rem 0.8rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.quiz-choices button {
+  border: 1px solid #6b7280;
+  border-radius: 0.4rem;
+  background: white;
+  text-align: left;
+}
+
+.quiz-choices button:disabled {
+  cursor: default;
+}
+
+.quiz-choices button.correct {
+  border-color: #18743a;
+  background: #e2f4e8;
+}
+
+.quiz-choices button.incorrect {
+  border-color: #a32323;
+  background: #fde8e8;
+}
+
+.flag-matcher {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #f4f6f8;
+  border-radius: 0.5rem;
+}
+
+.flag-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: end;
+}
+
+.flag-controls label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+.flag-controls select,
+.flag-controls button {
+  padding: 0.5rem;
+  font: inherit;
+}
+
+#match-status {
+  min-height: 1.5em;
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.match-grid figure {
+  margin: 0;
+  padding: 0.75rem;
+  background: white;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+
+.match-grid img {
+  width: 100%;
+  height: auto;
+}
+
+#flag-gallery {
+  margin-top: 1rem;
+}
+
 .flag-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -21,14 +145,248 @@ format: html
 }
 </style>
 
+<div class="flag-matcher">
+  <div class="flag-controls">
+    <label for="target-flag">Your flag
+      <select id="target-flag"></select>
+    </label>
+    <label for="compare-by">Compare
+      <select id="compare-by">
+        <option value="overall">Overall</option>
+        <option value="color">Color mix</option>
+        <option value="pattern">Pattern / color placement</option>
+        <option value="shape">Shape (width-to-height ratio)</option>
+      </select>
+    </label>
+    <label for="match-order">Find
+      <select id="match-order">
+        <option value="closest">Three closest</option>
+        <option value="farthest">Three most different</option>
+      </select>
+    </label>
+  </div>
+  <p id="match-status" role="status">Preparing flag comparisons…</p>
+  <div id="match-results" class="match-grid" aria-live="polite"></div>
+</div>
+
+<details>
+  <summary>Browse all flags</summary>
 ```{r}
 #| echo: false
 #| results: asis
 flags <- sort(list.files(pattern = "^[a-z]{2}(-[a-z]{3})?\\.png$"))
 codes <- toupper(sub("\\.png$", "", flags))
 items <- sprintf(
-  '<figure><img src="%s" alt="Flag of %s"><figcaption>%s</figcaption></figure>',
+  '<figure><img src="%s" alt="Flag of %s" loading="lazy"><figcaption>%s</figcaption></figure>',
   flags, codes, codes
 )
-cat('<div class="flag-grid">\n', paste(items, collapse = "\n"), '\n</div>\n', sep = "")
+cat('<div id="flag-gallery" class="flag-grid">\n', paste(items, collapse = "\n"), '\n</div>\n', sep = "")
 ```
+</details>
+
+<script>
+const flagImages = Array.from(document.querySelectorAll("#flag-gallery img"));
+const flagSelect = document.querySelector("#target-flag");
+const compareSelect = document.querySelector("#compare-by");
+const orderSelect = document.querySelector("#match-order");
+const statusMessage = document.querySelector("#match-status");
+const results = document.querySelector("#match-results");
+const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+const quizImage = document.querySelector("#quiz-flag");
+const quizChoices = document.querySelector("#quiz-choices");
+const quizFeedback = document.querySelector("#quiz-feedback");
+const quizNext = document.querySelector("#quiz-next");
+const gameScore = document.querySelector("#game-score");
+const gameRound = document.querySelector("#game-round");
+
+const flags = flagImages.map((image) => {
+  const code = image.alt.replace("Flag of ", "");
+  let name = code;
+  try {
+    name = regionNames.of(code) || code;
+  } catch {
+    name = code;
+  }
+  const regionalNames = {
+    "GB-ENG": "England",
+    "GB-NIR": "Northern Ireland",
+    "GB-SCT": "Scotland",
+    "GB-WLS": "Wales"
+  };
+  name = regionalNames[code] || name;
+  const option = document.createElement("option");
+  option.value = code;
+  option.textContent = `${name} (${code})`;
+  flagSelect.append(option);
+  return { code, name, src: image.src, ratio: image.naturalWidth / image.naturalHeight };
+});
+
+let quizDeck = [];
+let currentQuizFlag;
+let score = 0;
+let round = 0;
+
+function shuffled(items) {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function nextQuizFlag() {
+  if (quizDeck.length === 0) quizDeck = shuffled(flags);
+  const previous = currentQuizFlag;
+  if (quizDeck[0] === previous && quizDeck.length > 1) {
+    [quizDeck[0], quizDeck[1]] = [quizDeck[1], quizDeck[0]];
+  }
+  currentQuizFlag = quizDeck.shift();
+  round += 1;
+  gameRound.textContent = round;
+  quizImage.src = currentQuizFlag.src;
+  quizImage.alt = "Flag to identify";
+  quizFeedback.textContent = "Choose the country or region for this flag.";
+  quizChoices.replaceChildren();
+  quizNext.disabled = true;
+
+  const choices = shuffled([
+    currentQuizFlag,
+    ...shuffled(flags.filter((flag) => flag !== currentQuizFlag)).slice(0, 3)
+  ]);
+  for (const flag of choices) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = flag.name;
+    button.dataset.correct = String(flag === currentQuizFlag);
+    button.addEventListener("click", () => {
+      const correct = flag === currentQuizFlag;
+      if (correct) score += 1;
+      gameScore.textContent = score;
+      quizFeedback.textContent = correct
+        ? `Correct! That's ${currentQuizFlag.name}.`
+        : `Not quite — that's ${currentQuizFlag.name}.`;
+      quizImage.alt = `Flag of ${currentQuizFlag.name}`;
+      for (const choice of quizChoices.children) {
+        choice.disabled = true;
+        if (choice.dataset.correct === "true") choice.classList.add("correct");
+      }
+      if (!correct) button.classList.add("incorrect");
+      quizNext.disabled = false;
+      quizNext.focus();
+    });
+    quizChoices.append(button);
+  }
+}
+
+quizNext.addEventListener("click", nextQuizFlag);
+nextQuizFlag();
+
+function extractFeatures(flag, context) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => {
+      flag.ratio = image.naturalWidth / image.naturalHeight;
+      context.clearRect(0, 0, 16, 10);
+      context.drawImage(image, 0, 0, 16, 10);
+      const pixels = context.getImageData(0, 0, 16, 10).data;
+      const grid = [];
+      const histogram = Array(64).fill(0);
+      for (let i = 0; i < pixels.length; i += 4) {
+        const rgb = [pixels[i], pixels[i + 1], pixels[i + 2]];
+        grid.push(...rgb);
+        const bin = (rgb[0] >> 6) * 16 + (rgb[1] >> 6) * 4 + (rgb[2] >> 6);
+        histogram[bin] += 1 / 160;
+      }
+      flag.grid = grid;
+      flag.histogram = histogram;
+      resolve();
+    };
+    image.onerror = () => reject(new Error(`Could not load ${flag.code} flag image`));
+    image.src = flag.src;
+  });
+}
+
+function distance(first, second, method) {
+  if (method === "color" || method === "overall") {
+    let colorDifference = 0;
+    for (let i = 0; i < first.histogram.length; i += 1) {
+      colorDifference += Math.abs(first.histogram[i] - second.histogram[i]);
+    }
+    colorDifference /= 2;
+    if (method === "color") return colorDifference;
+
+    let patternDifference = 0;
+    for (let i = 0; i < first.grid.length; i += 1) {
+      patternDifference += Math.abs(first.grid[i] - second.grid[i]) / 255;
+    }
+    patternDifference /= first.grid.length;
+    const shapeDifference = Math.min(
+      Math.abs(Math.log(first.ratio / second.ratio)) / Math.log(2),
+      1
+    );
+    return 0.4 * colorDifference + 0.45 * patternDifference + 0.15 * shapeDifference;
+  }
+
+  if (method === "pattern") {
+    let difference = 0;
+    for (let i = 0; i < first.grid.length; i += 1) {
+      difference += Math.abs(first.grid[i] - second.grid[i]) / 255;
+    }
+    return difference / first.grid.length;
+  }
+
+  return Math.min(Math.abs(Math.log(first.ratio / second.ratio)) / Math.log(2), 1);
+}
+
+function showMatches() {
+  const selected = flags.find((flag) => flag.code === flagSelect.value);
+  if (!selected?.grid) return;
+  const ranked = flags
+    .filter((flag) => flag !== selected)
+    .map((flag) => ({ flag, score: distance(selected, flag, compareSelect.value) }))
+    .sort((a, b) => a.score - b.score || a.flag.code.localeCompare(b.flag.code));
+  const matches = orderSelect.value === "closest"
+    ? ranked.slice(0, 3)
+    : ranked.slice(-3).reverse();
+
+  results.replaceChildren();
+  for (const { flag, score } of matches) {
+    const figure = document.createElement("figure");
+    const image = document.createElement("img");
+    image.src = flag.src;
+    image.alt = `Flag of ${flag.name}`;
+    const caption = document.createElement("figcaption");
+    caption.textContent = `${flag.name} (${flag.code}) — distance ${score.toFixed(2)}`;
+    figure.append(image, caption);
+    results.append(figure);
+  }
+}
+
+flagSelect.addEventListener("change", showMatches);
+compareSelect.addEventListener("change", showMatches);
+orderSelect.addEventListener("change", showMatches);
+
+async function prepareComparisons() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 16;
+  canvas.height = 10;
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+  let next = 0;
+  async function loadNext() {
+    while (next < flags.length) {
+      const flag = flags[next];
+      next += 1;
+      await extractFeatures(flag, context);
+    }
+  }
+  await Promise.all(Array.from({ length: 4 }, loadNext));
+  statusMessage.textContent = "Ready. Smaller distances mean closer matches.";
+  showMatches();
+}
+
+prepareComparisons().catch((error) => {
+  statusMessage.textContent = "Could not prepare flag comparisons. Try refreshing the page.";
+  console.error(error);
+});
+</script>
