@@ -3,6 +3,20 @@ title: "Flags of the World"
 format: html
 ---
 
+## World Flags Viewer
+
+Select a country or region to view its flag.
+
+<div class="flag-viewer">
+<label for="viewer-flag">Choose a flag
+<select id="viewer-flag"></select>
+</label>
+<figure>
+<img id="viewer-image" alt="">
+<figcaption id="viewer-caption"></figcaption>
+</figure>
+</div>
+
 ## Guess the flag
 
 Look at the flag and choose its country or region. How many can you get right?
@@ -20,6 +34,37 @@ Score: <span id="game-score">0</span> / <span id="game-round">0</span>
 Choose a flag and a comparison method to see its three closest or most different matches. “Overall” combines color mix, pattern, and width-to-height ratio; the other options isolate one of those features.
 
 <style>
+.flag-viewer {
+  max-width: 700px;
+  margin: 1.5rem 0 2rem;
+  padding: 1.25rem;
+  background: #f4f6f8;
+  border-radius: 0.5rem;
+}
+
+.flag-viewer label {
+  display: grid;
+  gap: 0.35rem;
+  max-width: 360px;
+  font-weight: 600;
+}
+
+.flag-viewer select {
+  padding: 0.5rem;
+  font: inherit;
+}
+
+.flag-viewer figure {
+  margin: 1rem 0 0;
+  text-align: center;
+}
+
+.flag-viewer img {
+  width: min(100%, 480px);
+  max-height: 280px;
+  object-fit: contain;
+}
+
 .flag-game {
   max-width: 700px;
   margin: 1.5rem 0;
@@ -198,6 +243,9 @@ const quizFeedback = document.querySelector("#quiz-feedback");
 const quizNext = document.querySelector("#quiz-next");
 const gameScore = document.querySelector("#game-score");
 const gameRound = document.querySelector("#game-round");
+const viewerSelect = document.querySelector("#viewer-flag");
+const viewerImage = document.querySelector("#viewer-image");
+const viewerCaption = document.querySelector("#viewer-caption");
 
 const flags = flagImages.map((image) => {
   const code = image.alt.replace("Flag of ", "");
@@ -218,8 +266,21 @@ const flags = flagImages.map((image) => {
   option.value = code;
   option.textContent = `${name} (${code})`;
   flagSelect.append(option);
+  const viewerOption = option.cloneNode(true);
+  viewerSelect.append(viewerOption);
   return { code, name, src: image.src, ratio: image.naturalWidth / image.naturalHeight };
 });
+
+function showViewerFlag() {
+  const selected = flags.find((flag) => flag.code === viewerSelect.value);
+  if (!selected) return;
+  viewerImage.src = selected.src;
+  viewerImage.alt = `Flag of ${selected.name}`;
+  viewerCaption.textContent = selected.name;
+}
+
+viewerSelect.addEventListener("change", showViewerFlag);
+showViewerFlag();
 
 let quizDeck = [];
 let currentQuizFlag;
