@@ -69,8 +69,79 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="guess-the-flag" class="level2">
+<h2 class="anchored" data-anchor-id="guess-the-flag">Guess the flag</h2>
+<p>Look at the flag and choose its country or region. How many can you get right?</p>
+<div class="flag-game">
+<div class="game-score" aria-live="polite">
+<pre><code>Score: &lt;span id="game-score"&gt;0&lt;/span&gt; / &lt;span id="game-round"&gt;0&lt;/span&gt;</code></pre>
+</div>
+<img id="quiz-flag" class="quiz-flag" alt="Flag to identify">
+<div id="quiz-choices" class="quiz-choices">
+
+</div>
+<p id="quiz-feedback" role="status">
+Loading the flag quiz…
+</p>
+<p><button id="quiz-next" type="button" disabled="">Next flag</button></p>
+</div>
 <p>Choose a flag and a comparison method to see its three closest or most different matches. “Overall” combines color mix, pattern, and width-to-height ratio; the other options isolate one of those features.</p>
 <style>
+.flag-game {
+  max-width: 700px;
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  background: #f4f6f8;
+  border-radius: 0.5rem;
+}
+
+.game-score {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.quiz-flag {
+  display: block;
+  width: min(100%, 480px);
+  max-height: 280px;
+  margin: 0 auto 1rem;
+  object-fit: contain;
+}
+
+.quiz-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.65rem;
+}
+
+.flag-game button {
+  padding: 0.65rem 0.8rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.quiz-choices button {
+  border: 1px solid #6b7280;
+  border-radius: 0.4rem;
+  background: white;
+  text-align: left;
+}
+
+.quiz-choices button:disabled {
+  cursor: default;
+}
+
+.quiz-choices button.correct {
+  border-color: #18743a;
+  background: #e2f4e8;
+}
+
+.quiz-choices button.incorrect {
+  border-color: #a32323;
+  background: #fde8e8;
+}
+
 .flag-matcher {
   margin: 1.5rem 0;
   padding: 1rem;
@@ -1706,6 +1777,12 @@ const orderSelect = document.querySelector("#match-order");
 const statusMessage = document.querySelector("#match-status");
 const results = document.querySelector("#match-results");
 const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+const quizImage = document.querySelector("#quiz-flag");
+const quizChoices = document.querySelector("#quiz-choices");
+const quizFeedback = document.querySelector("#quiz-feedback");
+const quizNext = document.querySelector("#quiz-next");
+const gameScore = document.querySelector("#game-score");
+const gameRound = document.querySelector("#game-round");
 
 const flags = flagImages.map((image) => {
   const code = image.alt.replace("Flag of ", "");
@@ -1715,12 +1792,80 @@ const flags = flagImages.map((image) => {
   } catch {
     name = code;
   }
+  const regionalNames = {
+    "GB-ENG": "England",
+    "GB-NIR": "Northern Ireland",
+    "GB-SCT": "Scotland",
+    "GB-WLS": "Wales"
+  };
+  name = regionalNames[code] || name;
   const option = document.createElement("option");
   option.value = code;
   option.textContent = `${name} (${code})`;
   flagSelect.append(option);
   return { code, name, src: image.src, ratio: image.naturalWidth / image.naturalHeight };
 });
+
+let quizDeck = [];
+let currentQuizFlag;
+let score = 0;
+let round = 0;
+
+function shuffled(items) {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function nextQuizFlag() {
+  if (quizDeck.length === 0) quizDeck = shuffled(flags);
+  const previous = currentQuizFlag;
+  if (quizDeck[0] === previous && quizDeck.length > 1) {
+    [quizDeck[0], quizDeck[1]] = [quizDeck[1], quizDeck[0]];
+  }
+  currentQuizFlag = quizDeck.shift();
+  round += 1;
+  gameRound.textContent = round;
+  quizImage.src = currentQuizFlag.src;
+  quizImage.alt = "Flag to identify";
+  quizFeedback.textContent = "Choose the country or region for this flag.";
+  quizChoices.replaceChildren();
+  quizNext.disabled = true;
+
+  const choices = shuffled([
+    currentQuizFlag,
+    ...shuffled(flags.filter((flag) => flag !== currentQuizFlag)).slice(0, 3)
+  ]);
+  for (const flag of choices) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = flag.name;
+    button.dataset.correct = String(flag === currentQuizFlag);
+    button.addEventListener("click", () => {
+      const correct = flag === currentQuizFlag;
+      if (correct) score += 1;
+      gameScore.textContent = score;
+      quizFeedback.textContent = correct
+        ? `Correct! That's ${currentQuizFlag.name}.`
+        : `Not quite — that's ${currentQuizFlag.name}.`;
+      quizImage.alt = `Flag of ${currentQuizFlag.name}`;
+      for (const choice of quizChoices.children) {
+        choice.disabled = true;
+        if (choice.dataset.correct === "true") choice.classList.add("correct");
+      }
+      if (!correct) button.classList.add("incorrect");
+      quizNext.disabled = false;
+      quizNext.focus();
+    });
+    quizChoices.append(button);
+  }
+}
+
+quizNext.addEventListener("click", nextQuizFlag);
+nextQuizFlag();
 
 function extractFeatures(flag, context) {
   return new Promise((resolve, reject) => {
@@ -1830,6 +1975,7 @@ prepareComparisons().catch((error) => {
   console.error(error);
 });
 </script>
+</section>
 
 </main>
 <!-- /main column -->
